@@ -17,7 +17,7 @@ const nftSchema = new mongoose.Schema(
       trim: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
       trim: true,
     },
@@ -35,6 +35,10 @@ const nftSchema = new mongoose.Schema(
       default: "Active",
     },
     likeCount: {
+      type: Number,
+      default: 0,
+    },
+    viewedClick: {
       type: Number,
       default: 0,
     },

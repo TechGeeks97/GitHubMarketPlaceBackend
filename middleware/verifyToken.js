@@ -11,10 +11,10 @@ const verifyToken = (req, res, next) => {
         next();
       });
     } else {
-      return res.status(401).send("Your are not authenticated");
+      res.status(401).send("Your are not authenticated");
     }
   } catch (err) {
-    return res.status(500).send({ status: 500, message: err });
+    res.status(500).send({ status: 500, message: err });
   }
 };
 

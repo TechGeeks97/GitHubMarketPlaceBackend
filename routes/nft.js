@@ -7,14 +7,20 @@ const {
   deleteNft,
   getAllNft,
   searchNft,
+  filterNft,
+  nftVisitorsHandler,
+  nftLikesHandler,
 } = require("../controller/nftController");
 router.post("/", verifyToken, createNfts);
 router.put("/:id", verifyToken, updateNft);
+router.put("/NftmostViewed/:id", verifyToken, nftVisitorsHandler);
+router.put("/NftLikes/:id", verifyToken, nftLikesHandler);
 
 router.delete("/:id", verifyToken, deleteNft);
 
 router.get("/getAllNft", verifyToken, getAllNft);
 
+router.get("/filterNft", verifyToken, filterNft);
 router.get("/searchNft", verifyToken, searchNft);
 
 module.exports = router;
