@@ -9,6 +9,8 @@ const nftRoute = require("./routes/nft");
 const activityRoute = require("./routes/activity");
 const offerRoute = require("./routes/offers");
 const navBarRoute = require("./routes/cms/navbar");
+const footerRoute = require("./routes/cms/footer");
+const sectionRoute = require("./routes/cms/section");
 var bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
@@ -24,6 +26,8 @@ app.use("/api/nfts", nftRoute);
 app.use("/api/activity", activityRoute);
 app.use("/api/offers", offerRoute);
 app.use("/api/navbar", navBarRoute);
+app.use("/api/footer", footerRoute);
+app.use("/api/section", sectionRoute);
 app.listen(process.env.PORT || 3000, () => {
   console.log("Backend server is running");
 });

@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const sectionSchema = new mongoose.Schema(
+const foterSchema = new mongoose.Schema(
   {
-    section: {
+    footer: {
       type: Object,
       required: true,
     },
   },
   { timestamps: true }
 );
-module.exports = mongoose.model("SECTION", sectionSchema);
+module.exports = mongoose.model("FOOTER", foterSchema);
