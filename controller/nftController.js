@@ -1,4 +1,5 @@
 const Nfts = require("../models/NftModel");
+const Collections = require("../models/Collection");
 const ObjectId = require("mongoose").Types.ObjectId;
 const createNfts = async (req, res) => {
   const nft = new Nfts(req.body);
@@ -157,6 +158,28 @@ const searchNft = async (req, res) => {
     res.status(500).send({ status: 500, route: "search nft", message: err });
   }
 };
+const updateNftTotalSale = async (req, res) => {
+  try {
+    let collection = await Collections.findOne({
+      _id: ObjectId(req.params.collectionId),
+    }).lean();
+    console.log("collection", collection);
+    let obj = { ...collection };
+    obj.totalItemSold = obj.totalItemSold + 1;
+    const updateCollection = await Collections.findByIdAndUpdate(
+      req.params.collectionId,
+      {
+        $set: obj,
+      },
+      { new: true }
+    );
+
+    res.status(200).send({ status: 200, message: updateCollection });
+  } catch (err) {
+    console.log("err", err);
+    res.status(500).send({ status: 500, route: "search nft", message: err });
+  }
+};
 
 module.exports = {
   createNfts,
@@ -165,6 +188,7 @@ module.exports = {
   deleteNft,
   searchNft,
   filterNft,
+  updateNftTotalSale,
   nftVisitorsHandler,
   nftLikesHandler,
 };

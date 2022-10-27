@@ -5,10 +5,12 @@ const verifyToken = (req, res, next) => {
 
     if (authHeader) {
       jwt.verify(authHeader, "JSONWEBTOKEN", (err, user) => {
-        if (err)
+        if (err) {
           res.status(403).send({ status: 403, message: "Token is not valid" });
-        res.user = user;
-        next();
+        } else {
+          res.user = user;
+          next();
+        }
       });
     } else {
       res.status(401).send("Your are not authenticated");

@@ -11,6 +11,8 @@ const offerRoute = require("./routes/offers");
 const navBarRoute = require("./routes/cms/navbar");
 const footerRoute = require("./routes/cms/footer");
 const sectionRoute = require("./routes/cms/section");
+const pouRoute = require("./routes/pou");
+const articleRoute = require("./routes/articles");
 var bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
@@ -28,6 +30,8 @@ app.use("/api/offers", offerRoute);
 app.use("/api/navbar", navBarRoute);
 app.use("/api/footer", footerRoute);
 app.use("/api/section", sectionRoute);
+app.use("/api/pou", pouRoute);
+app.use("/api/articles", articleRoute);
 app.listen(process.env.PORT || 3000, () => {
   console.log("Backend server is running");
 });

@@ -35,12 +35,10 @@ const updateCollection = async (req, res) => {
 const deleteCollection = async (req, res) => {
   try {
     await Collection.findByIdAndDelete(req.params.id);
-    res
-      .status(200)
-      .send({
-        status: 200,
-        message: "collection has been deleted successfully",
-      });
+    res.status(200).send({
+      status: 200,
+      message: "collection has been deleted successfully",
+    });
   } catch (err) {
     res
       .status(500)
@@ -79,11 +77,22 @@ const searchCollections = async (req, res) => {
       .send({ status: 500, route: "search collection", message: err });
   }
 };
-
+const getHotCollections = async (req, res) => {
+  try {
+    const hotcollections = await Collection.find().sort({
+      totalItemSold: -1,
+      createdAt: -1,
+    });
+    res.status(200).send({ status: 200, data: hotcollections });
+  } catch (err) {
+    res.status(500).send({ status: 500, message: err });
+  }
+};
 module.exports = {
   createCollections,
   updateCollection,
   getAllCollections,
   deleteCollection,
   searchCollections,
+  getHotCollections,
 };

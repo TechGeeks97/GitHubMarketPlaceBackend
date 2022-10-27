@@ -27,6 +27,10 @@ const collectionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    totalItemSold: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

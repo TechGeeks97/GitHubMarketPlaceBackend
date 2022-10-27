@@ -11,11 +11,12 @@ const register = async (req, res) => {
     ...req.body,
   });
   try {
-    const verifyUser = await VerifyUser.findOne({
-      username: req.body.username,
+    const verifyUser = await User.findOne({
+      email: req.body.email,
     }).lean();
-    if (verifyUser && verifyUser.code != req?.body?.code) {
-      return res.status(402).send({ message: "Please enter a valid code" });
+    console.log("verifyuser", verifyUser);
+    if (verifyUser) {
+      return res.status(402).send({ message: "user already exist" });
     } else {
       const salt = await bcrypt.genSalt(10);
       // now we set user password to hashed password
@@ -100,7 +101,7 @@ const sendVerificationCode = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.body.username }).lean();
+    const user = await User.findOne({ username: req.body.email }).lean();
 
     !user && res.status(401).send({ status: 401, message: "No User found" });
 
